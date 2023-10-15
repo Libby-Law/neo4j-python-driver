@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Neo4j Query Executor</title>
+</head>
+<body>
+
+<h2>Enter Cypher Query</h2>
+<form action="/" method="post">
+    <textarea name="query" rows="4" cols="50"></textarea><br>
+    <input type="submit" value="Run Query">
+</form>
+
+{% if result_df is not none and not result_df.empty %}
+<h2>Results:</h2>
+<table border="1">
+    <thead>
+        <tr>
+            {% for col in result_df.columns %}
+            <th>{{ col }}</th>
+            {% endfor %}
+        </tr>
+    </thead>
+    <tbody>
+        {% for _, row in result_df.iterrows() %}
+        <tr>
+            {% for item in row %}
+            <td>{{ item }}</td>
+            {% endfor %}
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endif %}
+
+</body>
+</html>
